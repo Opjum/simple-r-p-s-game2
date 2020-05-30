@@ -23,11 +23,11 @@ namespace pierwszyprogram
                 int player1 = input1();
                 int player2 = input2();
 
-                string winner = whowin2(player1, player2);
+                string winner = Whowin2(player1, player2);
                 winMessage(winner);
             } while (playagain());
-            
 
+            
             Console.ReadLine();
         }
 
@@ -45,14 +45,52 @@ namespace pierwszyprogram
 
         static int input1()
         {
+            int input;
+            bool checking;
             Console.WriteLine("Player 1 please input your number");
-            return Convert.ToInt32(Console.ReadLine());
+            checking = int.TryParse(Console.ReadLine(), out input);
+            while (!checking || !BetweenRanges(1, 3, input))
+            {
+                if (!checking)
+                {
+                    Console.WriteLine("Player 1 you cant type string, please input number");
+                }
+                else if (!BetweenRanges(1, 3, input))
+                {
+                    Console.WriteLine("Player 1 please input number in range 1-3");
+                }
+
+                checking = int.TryParse(Console.ReadLine(), out input);
+
+            }
+
+
+            return input;
 
         }
         static int input2()
         {
+            int input;
+            bool checking;
             Console.WriteLine("Player 2 please input your number");
-            return Convert.ToInt32(Console.ReadLine());
+            checking = int.TryParse(Console.ReadLine(), out input);
+            while (!checking || !BetweenRanges(1, 3, input))
+            {
+                if (!checking)
+                {
+                    Console.WriteLine("Player 2 you cant type string, please input number");
+                }
+                else if (!BetweenRanges(1, 3, input))
+                {
+                    Console.WriteLine("Player 2 please input number in range 1-3");
+                }
+                
+                checking = int.TryParse(Console.ReadLine(), out input);
+                 
+            }
+            
+
+            return input;
         }
 
         
@@ -69,16 +107,21 @@ namespace pierwszyprogram
                 colorchange(ConsoleColor.Green);
                 Console.WriteLine("Player 2 WIN");
             }
-            else
+            else if (winner == "draw")
             {
                 colorchange(ConsoleColor.Red);
                 Console.WriteLine("its a draw");
+            }
+            else
+            {
+                colorchange(ConsoleColor.Blue);
+                Console.WriteLine("something go wrong");
             }
 
 
         }
 
-        static string whowin2(int x, int y)
+        static string Whowin2(int x, int y)
         {
             // x- player 1 input, y- player 2 input
             // 1 - rock, 2- paper, 3 = scissors
@@ -136,6 +179,16 @@ namespace pierwszyprogram
             }
 
         }
-	
+
+        static bool BetweenRanges(int a, int b, int number)
+        {
+            return (a <= number && number <= b);
+        }
+
+        static bool trying(int x, string msg)
+        {
+            return true;
+
+        }
     }
 }

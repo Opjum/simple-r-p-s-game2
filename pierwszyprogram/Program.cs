@@ -6,59 +6,76 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Net.NetworkInformation;
 
 namespace pierwszyprogram
 {
     class Program
     {
-        static void  aain()
+        static void  sain()
         {
 
-            string[,] multiarray = { { "jan", "rodo"},
-                { "krzysztof", "kononowicz"}, {"Major", "Suchodolski" } }; 
-            for (int i = 0; i < multiarray.GetLength(0); i++)
+            Console.WriteLine("welcome to quest random number");
+            
+            Random r = new Random();
+            int RandomNumber = r.Next(1, 11);
+            bool win;
+            int trycount = 1;
+            int userNumber = -1;
+
+            do
             {
-                for (int j = 0; j < multiarray.GetLength(1); j++)
-                {
-                    Console.Write(" {0}", multiarray[i, j].ToUpper());
-                }
-                Console.WriteLine();
-            }
-
-            // drugi blok tk
-            
-            int[] tablica = {20, 40, 60, 100};
-            int[] tablica1 = new int[10];
-            Array tablica2 = Array.CreateInstance(typeof(int), 10);
-
-            StringBuilder sb = new StringBuilder("RANDOM TEXT");
-            
-            
-
-
-            Console.ReadKey();
-        }
-
-
-        static void PrintArray(Array intArray, string mess)
-        {
-            foreach (int i in intArray)
-            {
-               
-                    Console.WriteLine("{0} : {1} ", i, mess);
                 
+
+                Console.WriteLine("choose number betwen 1 - 10");
+
+                
+                bool isENumber = int.TryParse(Console.ReadLine(), out userNumber);
+
+                while (!BetweenRanges(1,10, userNumber) || !isENumber)
+                {
+
+                    Console.WriteLine("u must type number between 1 and 10, and string is invalid");
+                    isENumber = int.TryParse(Console.ReadLine(), out userNumber);
+                    
+                }
+
+
+
+            if (userNumber == RandomNumber)
+            {
+                Console.WriteLine("gratz you guess correct number");
+                    win = true;
             }
+            else
+            {
+                    
+                    win = false;
+                    trycount += 1;
+
+                    if (userNumber > RandomNumber)
+                    {
+                        Console.WriteLine(" your number is too high, try again");
+                    }
+                    else {
+                        Console.WriteLine(" ur number is too low, try again");
+                         }
+                    
+            }
+            } while (!win);
+
+            Console.WriteLine($"u win after {trycount} tries");
+
+            Console.ReadKey();
         }
 
 
-        private static void SayHello()
-        {
-            
-            Console.Write("What is your name  ");
-            string name = Console.ReadLine();
-            Console.WriteLine("Hello {0}", name);
+        
 
-            Console.ReadKey();
+
+        static bool BetweenRanges(int a, int b, int number)
+        {
+            return (a <= number && number <= b);
         }
     }
 }
