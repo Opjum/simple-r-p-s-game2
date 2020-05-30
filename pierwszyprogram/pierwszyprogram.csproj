@@ -44,8 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Program - Copy.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Rock-Paper-Scissors-game.cs" />
+    <Compile Include="Guess a number-game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
